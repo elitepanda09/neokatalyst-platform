@@ -84,7 +84,10 @@ const Services = () => {
           <p className="text-lg text-gray-600 mb-8">
             Working with users to overcome their biggest obstacles and unlock digital transformation potential.
           </p>
-          <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all">
+          <button 
+            onClick={() => navigate('/what-we-do')}
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all"
+          >
             Explore All Services
           </button>
         </div>
