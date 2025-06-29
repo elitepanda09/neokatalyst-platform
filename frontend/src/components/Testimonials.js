@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Testimonials = () => {
+  const navigate = useNavigate();
   const testimonials = [
     {
       name: "Thomas Marx",
