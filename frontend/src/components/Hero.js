@@ -17,10 +17,16 @@ const Hero = () => {
               digital transformation, business process automation, and comprehensive platform development.
             </p>
             <div className="mt-8 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex">
-              <button className="w-full sm:w-auto bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+              <button 
+                onClick={() => navigate('/contact-us')}
+                className="w-full sm:w-auto bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
                 Get Started
               </button>
-              <button className="w-full sm:w-auto border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+              <button 
+                onClick={() => navigate('/what-we-do')}
+                className="w-full sm:w-auto border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+              >
                 Learn More
               </button>
             </div>
