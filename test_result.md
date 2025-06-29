@@ -116,6 +116,9 @@ backend:
       - working: true
         agent: "main"
         comment: "Basic FastAPI server with status check endpoints already working"
+      - working: true
+        agent: "testing"
+        comment: "Comprehensive backend testing completed. All tests passed successfully: 1) Root endpoint GET /api/ returns 'Hello World' correctly, 2) POST /api/status endpoint creates status checks with proper UUID generation, 3) GET /api/status endpoint retrieves status checks correctly, 4) MongoDB connection is working properly for data insertion and retrieval, 5) All endpoints return proper JSON responses. Created and executed backend_test.py to verify functionality."
 
 frontend:
   - task: "Create neokatalyst landing page with Both& structure"
