@@ -69,7 +69,10 @@ const Services = () => {
                     </div>
                   ))}
                 </div>
-                <button className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                <button 
+                  onClick={() => navigate('/what-we-do')}
+                  className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                >
                   Learn More
                 </button>
               </div>
