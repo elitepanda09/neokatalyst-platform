@@ -76,7 +76,10 @@ const Testimonials = () => {
         </div>
 
         <div className="text-center mt-16">
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+          <button 
+            onClick={() => navigate('/contact-us')}
+            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+          >
             Start Your Transformation Journey
           </button>
         </div>
