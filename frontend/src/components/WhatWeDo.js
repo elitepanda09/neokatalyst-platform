@@ -209,7 +209,10 @@ const WhatWeDo = () => {
           <p className="text-xl text-blue-100 mb-8">
             Let's discuss how our comprehensive digital transformation solutions can help your business thrive.
           </p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+          <button 
+            onClick={() => navigate('/contact-us')}
+            className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
             Get Started Today
           </button>
         </div>
