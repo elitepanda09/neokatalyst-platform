@@ -24,6 +24,9 @@ TEST_USER = {
 # Global variables to store test data
 access_token = None
 user_id = None
+workflow_id = None
+workflow_step_id = None
+task_id = None
 
 def test_root_endpoint():
     """Test the root endpoint GET /api/ to ensure it returns 'Hello World'"""
