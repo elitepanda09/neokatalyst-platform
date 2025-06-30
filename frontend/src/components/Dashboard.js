@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
+  const navigate = useNavigate();
 
   const tabs = [
     { id: 'overview', name: 'Overview', icon: '📊' },
@@ -79,7 +81,10 @@ const Dashboard = () => {
               </div>
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Automation Hub</h4>
               <p className="text-gray-600 mb-8">Create and manage automated workflows to streamline your business processes.</p>
-              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+              <button 
+                onClick={() => alert('Automation workflow builder coming in Phase 3!')}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              >
                 Create New Workflow
               </button>
             </div>
@@ -95,7 +100,10 @@ const Dashboard = () => {
               </div>
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Data Insights</h4>
               <p className="text-gray-600 mb-8">View comprehensive analytics and insights about your business performance.</p>
-              <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+              <button 
+                onClick={() => alert('Advanced analytics coming in Phase 4!')}
+                className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+              >
                 View Analytics
               </button>
             </div>
@@ -111,7 +119,10 @@ const Dashboard = () => {
               </div>
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Document Hub</h4>
               <p className="text-gray-600 mb-8">Upload, organize, and collaborate on documents with advanced management features.</p>
-              <button className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">
+              <button 
+                onClick={() => alert('Document management system coming in Phase 3!')}
+                className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
+              >
                 Upload Documents
               </button>
             </div>
@@ -127,7 +138,10 @@ const Dashboard = () => {
               </div>
               <h4 className="text-xl font-semibold text-gray-900 mb-4">E-commerce Platform</h4>
               <p className="text-gray-600 mb-8">Manage your products, orders, and customer interactions in one place.</p>
-              <button className="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors">
+              <button 
+                onClick={() => alert('Digital marketplace coming in Phase 6!')}
+                className="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors"
+              >
                 Manage Store
               </button>
             </div>
@@ -143,7 +157,10 @@ const Dashboard = () => {
               </div>
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Collaboration Hub</h4>
               <p className="text-gray-600 mb-8">Connect with your team through integrated communication and collaboration tools.</p>
-              <button className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors">
+              <button 
+                onClick={() => alert('Team collaboration tools coming in Phase 5!')}
+                className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
+              >
                 Open Chat
               </button>
             </div>

@@ -1,8 +1,11 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 const AboutUs = () => {
+  const navigate = useNavigate();
+
   const team = [
     {
       name: "Alex Johnson",
@@ -170,7 +173,10 @@ const AboutUs = () => {
           <p className="text-xl text-blue-100 mb-8">
             Join hundreds of businesses who trust neokatalyst for their digital transformation needs.
           </p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+          <button 
+            onClick={() => navigate('/contact-us')}
+            className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
             Contact Us Today
           </button>
         </div>
