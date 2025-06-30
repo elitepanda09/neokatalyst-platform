@@ -52,6 +52,72 @@ const Dashboard = () => {
               ))}
             </div>
 
+            {/* Feature Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div 
+                onClick={() => navigate('/automation')}
+                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl">🤖</span>
+                </div>
+                <h3 className="text-lg font-bold mb-2">Business Process Automation</h3>
+                <p className="text-gray-600 text-sm">Create and manage automated workflows</p>
+              </div>
+
+              <div 
+                onClick={() => navigate('/analytics')}
+                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl">📈</span>
+                </div>
+                <h3 className="text-lg font-bold mb-2">Analytics Dashboard</h3>
+                <p className="text-gray-600 text-sm">Real-time insights and data visualization</p>
+              </div>
+
+              <div 
+                onClick={() => navigate('/documents')}
+                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl">📁</span>
+                </div>
+                <h3 className="text-lg font-bold mb-2">Document Management</h3>
+                <p className="text-gray-600 text-sm">Upload, organize, and collaborate on documents</p>
+              </div>
+
+              <div 
+                onClick={() => navigate('/marketplace')}
+                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl">🛒</span>
+                </div>
+                <h3 className="text-lg font-bold mb-2">Digital Marketplace</h3>
+                <p className="text-gray-600 text-sm">E-commerce platform and order management</p>
+              </div>
+
+              <div 
+                onClick={() => navigate('/collaboration')}
+                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer"
+              >
+                <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl">👥</span>
+                </div>
+                <h3 className="text-lg font-bold mb-2">Team Collaboration</h3>
+                <p className="text-gray-600 text-sm">Real-time communication and collaboration</p>
+              </div>
+
+              <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer">
+                <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-2xl">⚡</span>
+                </div>
+                <h3 className="text-lg font-bold mb-2">AI Integration</h3>
+                <p className="text-gray-600 text-sm">Coming soon - AI-powered features</p>
+              </div>
+            </div>
+
             {/* Recent Activities */}
             <div className="bg-white rounded-xl shadow-lg p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activities</h3>
@@ -82,10 +148,10 @@ const Dashboard = () => {
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Automation Hub</h4>
               <p className="text-gray-600 mb-8">Create and manage automated workflows to streamline your business processes.</p>
               <button 
-                onClick={() => alert('Automation workflow builder coming in Phase 3!')}
+                onClick={() => navigate('/automation')}
                 className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
               >
-                Create New Workflow
+                Go to Workflow Builder
               </button>
             </div>
           </div>
@@ -101,10 +167,10 @@ const Dashboard = () => {
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Data Insights</h4>
               <p className="text-gray-600 mb-8">View comprehensive analytics and insights about your business performance.</p>
               <button 
-                onClick={() => alert('Advanced analytics coming in Phase 4!')}
+                onClick={() => navigate('/analytics')}
                 className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
               >
-                View Analytics
+                View Analytics Dashboard
               </button>
             </div>
           </div>
@@ -120,10 +186,10 @@ const Dashboard = () => {
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Document Hub</h4>
               <p className="text-gray-600 mb-8">Upload, organize, and collaborate on documents with advanced management features.</p>
               <button 
-                onClick={() => alert('Document management system coming in Phase 3!')}
+                onClick={() => navigate('/documents')}
                 className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
               >
-                Upload Documents
+                Open Document Manager
               </button>
             </div>
           </div>
@@ -139,10 +205,10 @@ const Dashboard = () => {
               <h4 className="text-xl font-semibold text-gray-900 mb-4">E-commerce Platform</h4>
               <p className="text-gray-600 mb-8">Manage your products, orders, and customer interactions in one place.</p>
               <button 
-                onClick={() => alert('Digital marketplace coming in Phase 6!')}
+                onClick={() => navigate('/marketplace')}
                 className="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors"
               >
-                Manage Store
+                Open Marketplace
               </button>
             </div>
           </div>
@@ -158,10 +224,10 @@ const Dashboard = () => {
               <h4 className="text-xl font-semibold text-gray-900 mb-4">Collaboration Hub</h4>
               <p className="text-gray-600 mb-8">Connect with your team through integrated communication and collaboration tools.</p>
               <button 
-                onClick={() => alert('Team collaboration tools coming in Phase 5!')}
+                onClick={() => navigate('/collaboration')}
                 className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors"
               >
-                Open Chat
+                Open Chat & Collaboration
               </button>
             </div>
           </div>
