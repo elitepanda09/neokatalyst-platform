@@ -657,7 +657,8 @@ def run_all_tests():
     """Run all tests and return overall success status"""
     print("🚀 Starting backend API tests...")
     
-    tests = [
+    # Basic API and Authentication Tests
+    basic_tests = [
         ("Root Endpoint", test_root_endpoint),
         ("MongoDB Connection", test_mongodb_connection),
         ("User Registration", test_user_registration),
@@ -668,9 +669,27 @@ def run_all_tests():
         ("Update User Profile", test_update_user_profile),
         ("Protected Endpoint Access", test_protected_endpoint),
         ("Protected Endpoint Without Token", test_protected_endpoint_without_token),
-        ("Protected Endpoint With Invalid Token", test_protected_endpoint_with_invalid_token),
+        ("Protected Endpoint With Invalid Token", test_protected_endpoint_with_invalid_token)
+    ]
+    
+    # Phase 3: Business Process Automation Tests
+    automation_tests = [
+        ("Create Workflow", test_create_workflow),
+        ("Get Workflows", test_get_workflows),
+        ("Get Specific Workflow", test_get_specific_workflow),
+        ("Create Task", test_create_task),
+        ("Get Tasks", test_get_tasks),
+        ("Update Task Status", test_update_task_status),
+        ("Task Status Transition", test_task_status_transition)
+    ]
+    
+    # Final Tests
+    final_tests = [
         ("User Logout", test_user_logout)
     ]
+    
+    # Combine all tests
+    tests = basic_tests + automation_tests + final_tests
     
     results = []
     for test_name, test_func in tests:
