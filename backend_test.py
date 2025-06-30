@@ -396,6 +396,263 @@ def test_user_logout():
         print(f"❌ User logout test failed with exception: {str(e)}")
         return False
 
+# ============ PHASE 3: BUSINESS PROCESS AUTOMATION TESTS ============
+
+def test_create_workflow():
+    """Test POST /api/workflows endpoint to create a new workflow with steps"""
+    print("\n🔍 Testing workflow creation POST /api/workflows...")
+    try:
+        # Create a workflow with multiple steps
+        workflow_data = {
+            "name": f"Test Workflow {uuid.uuid4().hex[:8]}",
+            "description": "A test workflow for automated testing",
+            "steps": [
+                {
+                    "name": "Step 1: Planning",
+                    "description": "Initial planning phase",
+                    "assignee_id": user_id,
+                    "required_approvals": 1,
+                    "order": 1
+                },
+                {
+                    "name": "Step 2: Implementation",
+                    "description": "Implementation phase",
+                    "assignee_id": user_id,
+                    "required_approvals": 1,
+                    "order": 2
+                },
+                {
+                    "name": "Step 3: Review",
+                    "description": "Final review phase",
+                    "assignee_id": user_id,
+                    "required_approvals": 2,
+                    "order": 3
+                }
+            ]
+        }
+        
+        headers = {"Authorization": f"Bearer {access_token}"}
+        response = requests.post(f"{API_BASE_URL}/workflows", json=workflow_data, headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if (data.get("name") == workflow_data["name"] and 
+                data.get("description") == workflow_data["description"] and
+                len(data.get("steps", [])) == 3):
+                
+                # Store workflow ID and first step ID for subsequent tests
+                global workflow_id, workflow_step_id
+                workflow_id = data.get("id")
+                workflow_step_id = data.get("steps")[0].get("id")
+                
+                print(f"✅ Create workflow test passed! Workflow created with ID: {workflow_id}")
+                return True
+            else:
+                print(f"❌ Create workflow test failed! Unexpected response data: {data}")
+                return False
+        else:
+            print(f"❌ Create workflow test failed! Status code: {response.status_code}")
+            print(f"Response: {response.text}")
+            return False
+    except Exception as e:
+        print(f"❌ Create workflow test failed with exception: {str(e)}")
+        return False
+
+def test_get_workflows():
+    """Test GET /api/workflows endpoint to retrieve all workflows"""
+    print("\n🔍 Testing GET /api/workflows endpoint...")
+    try:
+        headers = {"Authorization": f"Bearer {access_token}"}
+        response = requests.get(f"{API_BASE_URL}/workflows", headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if isinstance(data, list):
+                # Check if our created workflow is in the list
+                found = False
+                for workflow in data:
+                    if workflow.get("id") == workflow_id:
+                        found = True
+                        break
+                
+                if found:
+                    print(f"✅ Get workflows test passed! Retrieved {len(data)} workflows including our test workflow.")
+                    return True
+                else:
+                    print(f"❌ Get workflows test failed! Could not find our test workflow with ID: {workflow_id}")
+                    return False
+            else:
+                print(f"❌ Get workflows test failed! Expected a list but got: {data}")
+                return False
+        else:
+            print(f"❌ Get workflows test failed! Status code: {response.status_code}")
+            print(f"Response: {response.text}")
+            return False
+    except Exception as e:
+        print(f"❌ Get workflows test failed with exception: {str(e)}")
+        return False
+
+def test_get_specific_workflow():
+    """Test GET /api/workflows/{workflow_id} endpoint to retrieve a specific workflow"""
+    print(f"\n🔍 Testing GET /api/workflows/{workflow_id} endpoint...")
+    try:
+        headers = {"Authorization": f"Bearer {access_token}"}
+        response = requests.get(f"{API_BASE_URL}/workflows/{workflow_id}", headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if data.get("id") == workflow_id and len(data.get("steps", [])) == 3:
+                print(f"✅ Get specific workflow test passed! Successfully retrieved workflow with ID: {workflow_id}")
+                return True
+            else:
+                print(f"❌ Get specific workflow test failed! Unexpected response data: {data}")
+                return False
+        else:
+            print(f"❌ Get specific workflow test failed! Status code: {response.status_code}")
+            print(f"Response: {response.text}")
+            return False
+    except Exception as e:
+        print(f"❌ Get specific workflow test failed with exception: {str(e)}")
+        return False
+
+def test_create_task():
+    """Test POST /api/tasks endpoint to create a new task"""
+    print("\n🔍 Testing task creation POST /api/tasks...")
+    try:
+        # Create a task for the first step of our workflow
+        task_data = {
+            "workflow_id": workflow_id,
+            "step_id": workflow_step_id,
+            "title": f"Test Task {uuid.uuid4().hex[:8]}",
+            "description": "A test task for automated testing",
+            "assignee_id": user_id,
+            "due_date": (datetime.utcnow() + timedelta(days=7)).isoformat()
+        }
+        
+        headers = {"Authorization": f"Bearer {access_token}"}
+        response = requests.post(f"{API_BASE_URL}/tasks", json=task_data, headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if (data.get("workflow_id") == workflow_id and 
+                data.get("step_id") == workflow_step_id and
+                data.get("title") == task_data["title"] and
+                data.get("status") == "pending"):
+                
+                # Store task ID for subsequent tests
+                global task_id
+                task_id = data.get("id")
+                
+                print(f"✅ Create task test passed! Task created with ID: {task_id}")
+                return True
+            else:
+                print(f"❌ Create task test failed! Unexpected response data: {data}")
+                return False
+        else:
+            print(f"❌ Create task test failed! Status code: {response.status_code}")
+            print(f"Response: {response.text}")
+            return False
+    except Exception as e:
+        print(f"❌ Create task test failed with exception: {str(e)}")
+        return False
+
+def test_get_tasks():
+    """Test GET /api/tasks endpoint to retrieve user's tasks"""
+    print("\n🔍 Testing GET /api/tasks endpoint...")
+    try:
+        headers = {"Authorization": f"Bearer {access_token}"}
+        response = requests.get(f"{API_BASE_URL}/tasks", headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if isinstance(data, list):
+                # Check if our created task is in the list
+                found = False
+                for task in data:
+                    if task.get("id") == task_id:
+                        found = True
+                        break
+                
+                if found:
+                    print(f"✅ Get tasks test passed! Retrieved {len(data)} tasks including our test task.")
+                    return True
+                else:
+                    print(f"❌ Get tasks test failed! Could not find our test task with ID: {task_id}")
+                    return False
+            else:
+                print(f"❌ Get tasks test failed! Expected a list but got: {data}")
+                return False
+        else:
+            print(f"❌ Get tasks test failed! Status code: {response.status_code}")
+            print(f"Response: {response.text}")
+            return False
+    except Exception as e:
+        print(f"❌ Get tasks test failed with exception: {str(e)}")
+        return False
+
+def test_update_task_status():
+    """Test PUT /api/tasks/{task_id} endpoint to update task status"""
+    print(f"\n🔍 Testing PUT /api/tasks/{task_id} endpoint...")
+    try:
+        # Update task status to in_progress
+        update_data = {
+            "status": "in_progress",
+            "description": "Task is now in progress"
+        }
+        
+        headers = {"Authorization": f"Bearer {access_token}"}
+        response = requests.put(f"{API_BASE_URL}/tasks/{task_id}", json=update_data, headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if (data.get("id") == task_id and 
+                data.get("status") == "in_progress" and
+                data.get("description") == update_data["description"]):
+                
+                print(f"✅ Update task status test passed! Task status updated to in_progress.")
+                return True
+            else:
+                print(f"❌ Update task status test failed! Unexpected response data: {data}")
+                return False
+        else:
+            print(f"❌ Update task status test failed! Status code: {response.status_code}")
+            print(f"Response: {response.text}")
+            return False
+    except Exception as e:
+        print(f"❌ Update task status test failed with exception: {str(e)}")
+        return False
+
+def test_task_status_transition():
+    """Test task status transitions from pending -> in_progress -> completed"""
+    print("\n🔍 Testing task status transition to completed...")
+    try:
+        # Update task status to completed
+        update_data = {
+            "status": "completed"
+        }
+        
+        headers = {"Authorization": f"Bearer {access_token}"}
+        response = requests.put(f"{API_BASE_URL}/tasks/{task_id}", json=update_data, headers=headers)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if (data.get("id") == task_id and 
+                data.get("status") == "completed" and
+                data.get("completed_at") is not None):
+                
+                print(f"✅ Task status transition test passed! Task status updated to completed with completion timestamp.")
+                return True
+            else:
+                print(f"❌ Task status transition test failed! Unexpected response data: {data}")
+                return False
+        else:
+            print(f"❌ Task status transition test failed! Status code: {response.status_code}")
+            print(f"Response: {response.text}")
+            return False
+    except Exception as e:
+        print(f"❌ Task status transition test failed with exception: {str(e)}")
+        return False
+
 def run_all_tests():
     """Run all tests and return overall success status"""
     print("🚀 Starting backend API tests...")
