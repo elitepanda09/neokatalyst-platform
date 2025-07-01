@@ -19,9 +19,13 @@ import json
 
 
 
+from pathlib import Path
 
-ROOT_DIR = /app/backend
-load_dotenv(/app/backend/.env)
+ROOT_DIR = Path(__file__).resolve().parent.parent 
+
+from dotenv import load_dotenv
+
+load_dotenv(ROOT_DIR / ".env")
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
