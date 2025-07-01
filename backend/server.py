@@ -33,9 +33,9 @@ print("✅ DB_NAME:", os.environ.get("neokatalyst_production"))
 
 
 # MongoDB connection
-mongo_url = os.environ['MONGO_URL']
+mongo_url = os.environ["mongodb+srv://neokatalyst-admin:GvqlxkwXkiFM3PGB@cluster0neokatalyst-clu.eq0eg1j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0neokatalyst-cluster"]
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+db = client[os.environ["neokatalyst_production"]]
 
 import os
 print("Loaded MongoDB URI:", os.environ.get("MONGO_URL", "[MONGO_URL not found]"))
