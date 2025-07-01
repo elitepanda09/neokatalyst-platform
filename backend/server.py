@@ -18,14 +18,16 @@ from enum import Enum
 import json
 
 
-
 from pathlib import Path
-
-ROOT_DIR = Path(__file__).resolve().parent.parent 
-
 from dotenv import load_dotenv
+import os
 
+ROOT_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT_DIR / ".env")
+
+print("✅ MONGO_URL:", os.environ.get("MONGO_URL"))
+print("✅ DB_NAME:", os.environ.get("DB_NAME"))
+
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
