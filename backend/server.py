@@ -17,6 +17,10 @@ import base64
 from enum import Enum
 import json
 
+import os
+print("Loaded MongoDB URI:", os.environ.get("MONGO_URL", "[MONGO_URL not found]"))
+
+
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
