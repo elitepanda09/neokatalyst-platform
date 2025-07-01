@@ -25,20 +25,11 @@ import os
 ROOT_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(ROOT_DIR / ".env")
 
-MONGO_URL = "mongodb+srv://neokatalyst-admin:GvqlxkwXkiFM3PGB@cluster0neokatalyst-clu.eq0eg1j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0neokatalyst-cluster"
-DB_NAME = "neokatalyst_production"
-
-print("✅ MONGO_URL:", os.environ.get("mongodb+srv://neokatalyst-admin:GvqlxkwXkiFM3PGB@cluster0neokatalyst-clu.eq0eg1j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0neokatalyst-cluster"))
-print("✅ DB_NAME:", os.environ.get("neokatalyst_production"))
-
-
 # MongoDB connection
-mongo_url = os.environ["mongodb+srv://neokatalyst-admin:GvqlxkwXkiFM3PGB@cluster0neokatalyst-clu.eq0eg1j.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0neokatalyst-cluster"]
+mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ["neokatalyst_production"]]
+db = client[os.environ['DB_NAME']]
 
-import os
-print("Loaded MongoDB URI:", os.environ.get("MONGO_URL", "[MONGO_URL not found]"))
 
 # JWT Configuration
 JWT_SECRET = os.environ.get('JWT_SECRET', 'your-secret-key-change-this-in-production')
