@@ -23,6 +23,6 @@
     }
   ],
   "env": {
-    "REACT_APP_BACKEND_URL": "@react_app_backend_url"
+    "REACT_APP_BACKEND_URL": "neokatalyst-platform-production.up.railway.app"
   }
 }
