@@ -904,9 +904,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
     allow_origins=[
-        "https://neokatalyst-platform1.vercel.app",
-        "http://localhost:3000",  # For local development
-        "http://127.0.0.1:3000",  # For local development
+        "https://neokatalyst-platform-production.up.railway.app",
+
     ],
     allow_methods=["*"],
     allow_headers=["*"],
