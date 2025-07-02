@@ -897,21 +897,19 @@ async def get_dashboard_data(current_user: User = Depends(get_current_user)):
         }
     }
 
-from fastapi.middleware.cors import CORSMiddleware
-
-# Include the router in the main app
-app.include_router(api_router)
-
-# Add CORS middleware
+# Add CORS middleware first
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
     allow_origins=[
-        "https://neokatalyst-platform2.vercel.app",  # ✅ This is your frontend
+        "https://neokatalyst-platform2.vercel.app",
     ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Then include the router
+app.include_router(api_router)
 
 # Configure logging
 logging.basicConfig(
