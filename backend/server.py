@@ -106,12 +106,18 @@ class User(BaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     last_login: Optional[datetime] = None
 
+from pydantic import BaseModel, EmailStr
+from typing import Optional
+
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
     full_name: str
     company: Optional[str] = None
     phone: Optional[str] = None
+
+
+
 
 class UserLogin(BaseModel):
     email: EmailStr
