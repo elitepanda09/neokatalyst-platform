@@ -218,4 +218,6 @@ const Register = () => {
   );
 };
 
+console.log("Registering with data:", registerData);
+
 export default Register;
