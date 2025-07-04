@@ -28,7 +28,7 @@ const Register = () => {
     e.preventDefault();
     setError('');
 
-    // Validation
+    // Basic validation
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
@@ -41,16 +41,24 @@ const Register = () => {
 
     setLoading(true);
 
+    // Exclude confirmPassword before sending to backend
     const { confirmPassword, ...registerData } = formData;
-    const result = await register(registerData);
-    
-    if (result.success) {
-      navigate('/dashboard');
-    } else {
-      setError(result.error);
+
+    console.log("Registering with data:", registerData);
+
+    try {
+      const result = await register(registerData);
+
+      if (result.success) {
+        navigate('/dashboard');
+      } else {
+        setError(result.error || 'Registration failed');
+      }
+    } catch (err) {
+      setError('An unexpected error occurred');
+    } finally {
+      setLoading(false);
     }
-    
-    setLoading(false);
   };
 
   return (
@@ -92,6 +100,7 @@ const Register = () => {
                   name="full_name"
                   type="text"
                   required
+                  disabled={loading}
                   value={formData.full_name}
                   onChange={handleChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -111,6 +120,7 @@ const Register = () => {
                   type="email"
                   autoComplete="email"
                   required
+                  disabled={loading}
                   value={formData.email}
                   onChange={handleChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -128,6 +138,7 @@ const Register = () => {
                   id="company"
                   name="company"
                   type="text"
+                  disabled={loading}
                   value={formData.company}
                   onChange={handleChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -145,6 +156,7 @@ const Register = () => {
                   id="phone"
                   name="phone"
                   type="tel"
+                  disabled={loading}
                   value={formData.phone}
                   onChange={handleChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -164,6 +176,7 @@ const Register = () => {
                   type="password"
                   autoComplete="new-password"
                   required
+                  disabled={loading}
                   value={formData.password}
                   onChange={handleChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -183,6 +196,7 @@ const Register = () => {
                   type="password"
                   autoComplete="new-password"
                   required
+                  disabled={loading}
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
@@ -217,7 +231,5 @@ const Register = () => {
     </div>
   );
 };
-
-console.log("Registering with data:", registerData);
 
 export default Register;
