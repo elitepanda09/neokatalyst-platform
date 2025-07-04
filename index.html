@@ -4,13 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
         <meta name="description" content="NeoKatalyst" />
->>>>>>> 37a0aeb83b598ddee411d31adf9ae7c5a8093cea
->>>>>>> 87f3121f85aa190db43717d98d596eb896acfd64
         <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -40,7 +34,9 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
         <a
+            id="emergent-badge"
             target="_blank"
+            href="https://app.emergent.sh/?utm_source=emergent-badge"
             style="
                 display: flex !important;
                 align-items: center !important;
@@ -88,6 +84,7 @@
             !(function (t, e) {
                 var o, n, p, r;
                 e.__SV ||
+                    ((window.posthog = e),
                     (e._i = []),
                     (e.init = function (i, s, a) {
                         function g(t, e) {
@@ -110,6 +107,8 @@
                             (p.async = !0),
                             (p.src =
                                 s.api_host.replace(
+                                    ".i.posthog.com",
+                                    "-assets.i.posthog.com",
                                 ) + "/static/array.js"),
                             (r =
                                 t.getElementsByTagName(
@@ -117,9 +116,12 @@
                                 )[0]).parentNode.insertBefore(p, r);
                         var u = e;
                         for (
+                            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
                                 u.people = u.people || [],
                                 u.toString = function (t) {
+                                    var e = "posthog";
                                     return (
+                                        "posthog" !== a && (e += "." + a),
                                         t || (e += " (stub)"),
                                         e
                                     );
@@ -139,6 +141,9 @@
                         e._i.push([i, s, a]);
                     }),
                     (e.__SV = 1));
+            })(document, window.posthog || []);
+            posthog.init("phc_yJW1VjHGGwmCbbrtczfqqNxgBDbhlhOWcdzcIJEOTFE", {
+                api_host: "https://us.i.posthog.com",
                 person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
             });
         </script>
